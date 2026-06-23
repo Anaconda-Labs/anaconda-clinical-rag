@@ -1,0 +1,63 @@
+name: anaconda-clinical-rag
+description: >
+  RAG over the Merck Manual on Anaconda's local stack: Qwen2.5-14B-Instruct
+  generation + Qwen3-Embedding-8B retrieval, served locally by Anaconda Desktop.
+  All packages from Anaconda's curated channels; runs on CPU, no GPU required.
+
+# ── Commands ──────────────────────────────────────────────────────────────────
+commands:
+  scrape:
+    unix: python scripts/scraper.py
+    description: "Fetch Merck Manual topics into data/raw/"
+
+  build-index:
+    unix: python scripts/build_index.py
+    description: "Chunk, embed, and build FAISS index from scraped data"
+
+  serve:
+    unix: uvicorn src.api:app --host 0.0.0.0 --port 8000 --reload
+    description: "Start the Clinical Knowledge API (Anaconda Desktop inference)"
+
+  demo:
+    unix: python src/gradio_app.py
+    description: "Launch the Gradio demo UI at http://localhost:7860"
+
+  evaluate:
+    unix: python eval/run_eval.py
+    description: "Run evaluation harness on 5 benchmark queries"
+
+# ── Variables (mirror .env.example) ────────────────────────────────────────────
+variables:
+  DESKTOP_API_URL:
+    description: "URL of the running Anaconda Desktop local model server"
+    default: "http://localhost:8080/v1"
+
+  INFERENCE_MODEL:
+    description: "Inference model loaded as a server in Anaconda Desktop"
+    default: "Qwen2.5-14B-Instruct"
+
+  EMBEDDING_MODEL:
+    description: "Embedding model loaded as a server in Anaconda Desktop"
+    default: "Qwen3-Embedding-8B"
+
+  TOP_K:
+    description: "Number of chunks returned to the LLM (post FAISS search)"
+    default: "5"
+
+# ── Packages (mirrors environment.yml for Anaconda Project compatibility) ──────
+packages:
+  - python=3.12
+  - requests==2.34.2
+  - beautifulsoup4==4.15.0
+  - lxml==6.1.0
+  - faiss-cpu==1.14.1
+  - fastapi==0.135.4
+  - uvicorn==0.40.0
+  - pydantic==2.13.4
+  - gradio==6.14.0
+  - evidently==0.7.21
+  - jupyter==1.1.1
+  - ipykernel==7.2.0
+  - python-dotenv==1.2.1
+  - tqdm==4.68.2
+  - rich==15.0.0
