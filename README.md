@@ -1,5 +1,7 @@
 # 🏥 Clinical Knowledge RAG — Anaconda Desktop + FAISS + FastAPI
 
+[![Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Anaconda-Labs/anaconda-clinical-rag/main/.github/badges/status.json?1780334316&cacheSeconds=300)](https://github.com/Anaconda-Labs/anaconda-clinical-rag)
+
 > **Owner:** Federico Rubiano ([@federicorubiano](https://github.com/federicorubiano)) | **Status:** Tested end-to-end | **Last tested:** 2026-06-17 | **Estimated time:** 60–90 minutes
 
 A hands-on **guide**: build your own clinical-question RAG system, step by step, grounded in the **Merck Manual Professional Edition** — running entirely on your own machine. By the end you'll have a working, locally-served RAG you can extend.
