@@ -180,7 +180,10 @@ conda activate anaconda-clinical-rag
 
 ```bash
 cp .env.example .env
-# Edit .env — set INFERENCE_MODEL / EMBEDDING_MODEL to match your Desktop servers
+# Edit .env and set the two model names to match the servers you launched.
+# With the models this guide recommends:
+#   INFERENCE_MODEL=Qwen2.5-14B-Instruct
+#   EMBEDDING_MODEL=Qwen3-Embedding-8B
 ```
 
 ### Step 4: Start both model servers (chat + embedder, at once)
