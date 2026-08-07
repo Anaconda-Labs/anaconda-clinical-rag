@@ -52,13 +52,12 @@ DESKTOP_API_BASE = (
 EMBEDDING_MODEL  = os.getenv("EMBEDDING_MODEL", "Qwen3-Embedding-8B")
 
 # Chunking — word-based, no tokenizer dependency.
-# Medical text tokenizes at ~2 tokens/word; 200 words ≈ 400 tokens — a good
-# retrieval granularity within the embedding model's input limit.
-CHUNK_SIZE_WORDS    = 200
-CHUNK_OVERLAP_WORDS = 30
+# Medical text tokenizes at ~1.4 tokens/word, so 350 words ≈ 490 tokens.
+CHUNK_SIZE_WORDS    = 350
+CHUNK_OVERLAP_WORDS = 50
 
-# Embedding batch size — embed one chunk at a time for stable, ordered results.
-BATCH_SIZE = 1
+# Number of chunks sent per /v1/embeddings request.
+BATCH_SIZE = 8
 
 logging.basicConfig(
     level=logging.INFO,
