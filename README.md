@@ -289,6 +289,16 @@ Metrics: groundedness · relevance · citation rate · disclaimer presence · ov
 ---
 
 
+## Known issues
+
+### Embedding server can exit with code 133 during indexing
+
+`build_index.py` embeds a number of chunks, then fails with `RemoteDisconnected` or `Connection refused`. The macOS crash log shows `EXC_BREAKPOINT` / `SIGTRAP` with `BUG IN CLIENT OF LIBMALLOC: memory corruption`.
+
+`CHUNK_SIZE_WORDS = 200` and `BATCH_SIZE = 1` keep each request small and send one chunk at a time. Reproduced on Anaconda Desktop 0.23.2 (2026-08-07) at those settings as well, so re-run `python scripts/build_index.py` if a build fails partway; the index and its metadata are only written after all embeddings succeed.
+
+---
+
 ## High-value AI packages showcased
 
 | Package | Role | Source |
