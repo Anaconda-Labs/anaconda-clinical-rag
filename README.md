@@ -1,6 +1,6 @@
 # 🏥 Clinical Knowledge RAG — Anaconda Desktop + FAISS + FastAPI
 
-[![Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Anaconda-Labs/anaconda-clinical-rag/main/.github/badges/status.json?1780334316&cacheSeconds=300)](https://github.com/Anaconda-Labs/anaconda-clinical-rag)
+[![Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Anaconda-Labs/anaconda-clinical-rag/main/.github/badges/status.json?1789981315&cacheSeconds=300)](https://github.com/Anaconda-Labs/anaconda-clinical-rag)
 
 > **Owner:** Federico Rubiano ([@federicorubiano](https://github.com/federicorubiano)) | **Status:** Tested end-to-end | **Last tested:** 2026-06-17 | **Estimated time:** 60–90 minutes
 
