@@ -83,7 +83,7 @@ Runs entirely locally:
         ├── Qwen3-Embedding-8B server  → localhost:8080/v1/embeddings
         └── Qwen2.5-14B-Instruct server            → localhost:8080/v1/chat/completions
     [Your shell]
-        └── FastAPI                    → 0.0.0.0:8000  ← the RAG API
+        └── FastAPI                    → 127.0.0.1:8000  ← the RAG API
 ```
 
 ---
@@ -235,7 +235,7 @@ Wrote data/index/merck.faiss (156 vectors)
 *Start state: the inference model server is running in Anaconda Desktop and the index exists.*
 
 ```bash
-uvicorn src.api:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.api:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 **✅ Checkpoint:** the log prints `API ready.` and `http://localhost:8000/docs` loads the Swagger UI.
@@ -288,6 +288,16 @@ Metrics: groundedness · relevance · citation rate · disclaimer presence · ov
 
 ---
 
+
+## Known issues
+
+### Embedding server can exit with code 133 during indexing
+
+`build_index.py` embeds a number of chunks, then fails with `RemoteDisconnected` or `Connection refused`. The macOS crash log shows `EXC_BREAKPOINT` / `SIGTRAP` with `BUG IN CLIENT OF LIBMALLOC: memory corruption`.
+
+`CHUNK_SIZE_WORDS = 200` and `BATCH_SIZE = 1` keep each request small and send one chunk at a time. Reproduced on Anaconda Desktop 0.23.2 (2026-08-07) at those settings as well, so re-run `python scripts/build_index.py` if a build fails partway; the index and its metadata are only written after all embeddings succeed.
+
+---
 
 ## High-value AI packages showcased
 
